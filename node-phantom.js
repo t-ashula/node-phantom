@@ -162,7 +162,7 @@ module.exports={
 							break;
 						case 'pageGetDone':
 						case 'pageEvaluated':
-							cmds[cmdId].cb(null,JSON.parse(response[3]));
+							cmds[cmdId].cb(null,JSON.parse(decodeURIComponent(response[3])));
 							delete cmds[cmdId];
 							break;
 						case 'pageClosed':

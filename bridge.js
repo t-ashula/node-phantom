@@ -7,7 +7,12 @@ var controlpage=webpage.create();
 
 function respond(response){
 //	console.log('responding:'+response);
-	controlpage.evaluate('function(){socket.emit("res",'+JSON.stringify(response)+');}');
+	controlpage.evaluate(function(r){
+          if(r.length > 2 && r[2] === 'pageEvaluated') {
+            r[3] = encodeURIComponent(r[3]);
+          }
+          socket.emit("res",r);
+        },response);
 }
 
 var pages={};
